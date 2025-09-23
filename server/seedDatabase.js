@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
+// Validate required env vars
+if (!process.env.MONGO_URI) {
+  console.error(
+    "Missing MONGO_URI environment variable. Please create a .env file based on .env.example and set MONGO_URI."
+  );
+  process.exit(1);
+}
+
 // Import Models
 const User = require("./models/User");
 const Course = require("./models/Course");

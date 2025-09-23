@@ -24,7 +24,14 @@ app.use(
 
 app.use(express.json());
 
-//database connection
+//database connection - fail fast if required env var is missing
+if (!MONGO_URI) {
+  console.error(
+    "Missing MONGO_URI environment variable. Create a .env file based on .env.example and set MONGO_URI to your MongoDB connection string."
+  );
+  process.exit(1);
+}
+
 mongoose
   .connect(MONGO_URI)
   .then(() => console.log("mongodb is connected"))
