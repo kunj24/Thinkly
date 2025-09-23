@@ -1,0 +1,27 @@
+# Node
+node_modules/
+npm-debug.log*
+package-lock.json
+.env
+.env.local
+.env.*.local
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# build
+dist/
+build/
+
+# server uploads
+server/uploads/
+
+# logs
+logs/
+*.log
+
+# local OS files
+Thumbs.db
