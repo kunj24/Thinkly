@@ -19,6 +19,7 @@ import {
 } from "@/services";
 import { ArrowUpDown, Star, Clock, Users, BookOpen, Filter, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
+import { formatINR } from "@/lib/currency";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 function createSearchParamsHelper(filterParams) {
@@ -322,7 +323,7 @@ function StudentViewCoursesPage() {
                             
                             <div className="flex items-center justify-between pt-4 border-t border-slate-100">
                               <div className="text-2xl font-bold text-blue-600">
-                                ${courseItem?.pricing}
+                                {formatINR(courseItem?.pricing)}
                               </div>
                               <Button
                                 size="sm"

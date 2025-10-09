@@ -8,6 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DollarSign, Users } from "lucide-react";
+import { formatINR } from "@/lib/currency";
 
 function InstructorDashboard({ listOfCourses }) {
   function calculateTotalStudentsAndProfit() {
@@ -52,7 +53,7 @@ function InstructorDashboard({ listOfCourses }) {
     {
       icon: DollarSign,
       label: "Total Revenue",
-      value: calculateTotalStudentsAndProfit().totalProfit,
+      value: formatINR(calculateTotalStudentsAndProfit().totalProfit),
     },
   ];
 

@@ -3,6 +3,7 @@ import banner from "../../../../public/banner-img.png";
 import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { useContext, useEffect } from "react";
+import { formatINR } from "@/lib/currency";
 import { StudentContext } from "@/context/student-context";
 import {
   checkCoursePurchaseInfoService,
@@ -224,7 +225,7 @@ function StudentHomePage() {
                       </div>
                       <div className="text-right">
                         <p className="font-bold text-xl text-blue-600">
-                          ${courseItem?.pricing}
+                          {formatINR(courseItem?.pricing)}
                         </p>
                       </div>
                     </div>

@@ -20,6 +20,7 @@ import {
 import { CheckCircle, Globe, Lock, PlayCircle, Star, Clock, Users, BookOpen, Award, ShoppingCart, Eye, Calendar } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { formatINR } from "@/lib/currency";
 import { useToast } from "@/hooks/use-toast";
 
 function StudentViewCourseDetailsPage() {
@@ -393,7 +394,7 @@ function StudentViewCourseDetailsPage() {
                   <div className="p-6">
                     <div className="text-center mb-6">
                       <div className="text-4xl font-bold text-blue-600 mb-2">
-                        ${studentViewCourseDetails?.pricing}
+                        {formatINR(studentViewCourseDetails?.pricing)}
                       </div>
                       <p className="text-slate-600">One-time payment</p>
                     </div>
