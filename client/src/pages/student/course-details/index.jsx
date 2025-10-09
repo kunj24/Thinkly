@@ -20,8 +20,10 @@ import {
 import { CheckCircle, Globe, Lock, PlayCircle, Star, Clock, Users, BookOpen, Award, ShoppingCart, Eye, Calendar } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 function StudentViewCourseDetailsPage() {
+  const { toast } = useToast();
   const {
     studentViewCourseDetails,
     setStudentViewCourseDetails,
@@ -90,15 +92,35 @@ function StudentViewCourseDetailsPage() {
       const response = await createOrderService(orderPayload);
 
       if (response.success) {
+        // Show success notification
+        toast({
+          title: "Course Enrolled Successfully! 🎉",
+          description: `You've successfully enrolled in "${studentViewCourseDetails?.title}". Redirecting to your courses...`,
+          variant: "default",
+        });
+        
         // Order is automatically confirmed with dummy payment
-        // Show success message and redirect
+        // Redirect to student courses after showing success message
         setTimeout(() => {
+          setOrderLoading(false);
           navigate("/student-courses");
         }, 2000);
+      } else {
+        // Handle API response failure
+        toast({
+          title: "Purchase Failed",
+          description: response.message || "Failed to enroll in course. Please try again.",
+          variant: "destructive",
+        });
+        setOrderLoading(false);
       }
     } catch (error) {
       console.error("Order creation failed:", error);
-    } finally {
+      toast({
+        title: "Error",
+        description: "An error occurred during enrollment. Please try again.",
+        variant: "destructive",
+      });
       setOrderLoading(false);
     }
   }
@@ -129,15 +151,22 @@ function StudentViewCourseDetailsPage() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         <Card className="w-96 border-0 shadow-xl">
           <CardHeader className="text-center pb-4">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
-              <ShoppingCart className="w-8 h-8 text-white" />
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center animate-pulse">
+              <ShoppingCart className="w-8 h-8 text-white animate-bounce" />
             </div>
             <CardTitle className="text-2xl font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
               Processing Purchase... 🎉
             </CardTitle>
             <p className="text-slate-600 mt-2">
-              Your course is being enrolled. Please wait...
+              Enrolling you in "{studentViewCourseDetails?.title}". This will only take a moment...
             </p>
+            <div className="flex items-center justify-center mt-4">
+              <div className="flex space-x-1">
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-2 h-2 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+              </div>
+            </div>
           </CardHeader>
         </Card>
       </div>

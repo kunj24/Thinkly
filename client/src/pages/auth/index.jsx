@@ -56,7 +56,7 @@ function AuthPage() {
             <GraduationCap className="h-6 w-6 text-white" />
           </div>
                     <span className="font-bold text-xl bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
-            EduNexus
+            Thinkly
           </span>
         </Link>
       </header>
